@@ -1,35 +1,23 @@
 from ..models.user import User
 from ..extensions import db, bcrypt
 from flask import jsonify, session, Response
+from typing import Union, Tuple
+
 
 class RegisterUser(object):
-    """
-BEGIN RegisterUser(username,password)
-        username = get input from user
-        password = get input from user
-        UniqueUser() = check if username is unique
-        IF UniqueUser() THEN
-            append username,password to Users()
-            DISPLAY "account created"
-            session = generate a uuid and append to localstorage()
-            renderapp = redirect to homepage() with login(username,password)
-        ELSE
-            DISPLAY "username taken!"
-        ENDIF
-END RegisterUser(username,password)
-    """
+
     def __init__(self,
                  username:str,
                  password:str
                  ):
         self.__username = username
-        self.__password = password
+        self.__password_hash = password
 
-    def register(self) -> tuple[Response, int] | bool:
+    def register(self) -> Tuple[Response, int]:
         try:
             if self.__username_unique():
                 hashed_password = self.__hash_password()
-                if hashed_password == "": return False
+                if hashed_password == "": return jsonify({"err": "hash failed"}), 401
                 print("[SUCCESS] user registered")
                 # store user id in session
                 new_user = User(
@@ -53,11 +41,7 @@ END RegisterUser(username,password)
             }), 400
         except Exception as e:
             print(f"[ERROR] failed to register user\n{e}")
-            return jsonify(
-            {
-                "message": "register failed",
-            }
-        ), 500
+        return jsonify({"status": "401"})
 
 
     def __username_unique(self) -> bool:
@@ -72,14 +56,15 @@ END RegisterUser(username,password)
             print(f"[ERROR] failed to perform SQL query in database \n {e}")
             return False
 
-    def __hash_password(self) -> str | bool:
+    def __hash_password(self) -> str:
         try:
             # ---- security methods (encryption/hasing passwords) ----#
-            self.__hashed_password = bcrypt.generate_password_hash(self.__password).decode("utf-8")
+            self.__hashed_password = bcrypt.generate_password_hash(self.__password_hash).decode("utf-8")
             return self.__hashed_password
             # ---- </security methods> ----#
         except Exception as e:
             print(f"[ERROR] failed to perform hashing/encrypting of account \n {e}")
-            return False
+        return jsonify({"status": "401"})
+
 
 
