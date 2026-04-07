@@ -2,6 +2,7 @@ from ..extensions import db
 
 class Entry(db.Model):
     """Table to record user entries id = pk relating what entry belongs to which user."""
+    __tablename__ = 'entries'
     id = db.Column(db.Integer, primary_key=True)
     merchant = db.Column(db.String(100))
     date = db.Column(db.String(20))

@@ -54,7 +54,7 @@ class RegisterUser(object):
             return True # if unique username_unique = true
         except Exception as e:
             print(f"[ERROR] failed to perform SQL query in database \n {e}")
-            return False
+        return False
 
     def __hash_password(self) -> str:
         try:

@@ -25,7 +25,7 @@ class LoginUser(object):
             ), 200
         except Exception as e:
             print(f"[ERROR] {e}")
-            return jsonify({"message": "server down"}), 401
+        return jsonify({"message": "server down"}), 401
 
     def valid_password(self) -> bool:
         # check if password is correct
