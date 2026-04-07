@@ -32,7 +32,10 @@ END RegisterUser(username,password)
                 if hashed_password == "": return False
                 print("[SUCCESS] user registered")
                 # store user id in session
-                new_user = User(username=self.__username, password=hashed_password)
+                new_user = User(
+                    username=self.__username,
+                    password=hashed_password
+                )
                 db.session.add(new_user)
                 db.session.commit()
                 session["user_id"] = new_user.id

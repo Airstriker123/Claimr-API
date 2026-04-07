@@ -8,7 +8,7 @@ from .extensions import db, bcrypt
 from .routes import register_routes
 
 
-def create_app():
+def create_app() -> Flask:
     app = Flask(__name__)
     app.config.from_object(Config)
 
