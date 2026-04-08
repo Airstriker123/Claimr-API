@@ -3,7 +3,7 @@ Backend api logic of Claimr
 
 #   project structure guide
 
-```jupyterpython
+```python
 claimr-backend/
 │
 ├── app/
