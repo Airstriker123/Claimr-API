@@ -3,7 +3,7 @@ Backend api logic of Claimr
 
 #   project structure guide
 
-```jupyterpython
+```python
 claimr-backend/
 │
 ├── app/
@@ -22,7 +22,7 @@ claimr-backend/
 │   │   ├── entries.py      # CRUD
 │   │   └── dashboard.py    # summaries (optional)
 │   │
-│   ├── services/           # logic layer (VERY good for marks)
+│   ├── services/           # logic layer
 │   │   ├── __init__.py
 │   │   ├── auth_service.py
 │   │   └── entry_service.py
@@ -32,7 +32,7 @@ claimr-backend/
 │   │   ├── validators.py
 │   │   └── helpers.py
 │
-├── migrations/             # if using Flask-Migrate (optional)
+│
 │
 ├── run.py                  # entry point
 ├── requirements.txt
