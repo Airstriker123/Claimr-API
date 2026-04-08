@@ -3,7 +3,7 @@ from app.services.register_user import RegisterUser
 from app.services.login_user import LoginUser
 from typing import Tuple
 
-auth_bp = Blueprint("auth", __name__)
+auth_bp = Blueprint("auth", __name__, url_prefix="/api")
 
 @auth_bp.route("/register", methods=["POST"])
 def register() -> Tuple[Response, int]:

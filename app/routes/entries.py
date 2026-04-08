@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 
 entries_bp = Blueprint("entries", __name__)
 
-@entries_bp.route("/api/entries", methods=["POST"])
+@entries_bp.route("/entries", methods=["POST"])
 def add_entry():
     return jsonify(
         {
@@ -11,6 +11,6 @@ def add_entry():
     )
 
 
-@entries_bp.route("/api/entries", methods=["GET"])
+@entries_bp.route("/entries", methods=["GET"])
 def fetch_entries():
     return jsonify([])

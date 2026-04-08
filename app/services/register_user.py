@@ -22,7 +22,7 @@ class RegisterUser(object):
                 # store user id in session
                 new_user = User(
                     username=self.__username,
-                    password=hashed_password
+                    password_hash=hashed_password
                 )
                 db.session.add(new_user)
                 db.session.commit()

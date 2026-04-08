@@ -22,7 +22,7 @@ def create_app() -> Flask:
         origins=\
         [
             "https://claimr.dev",
-            "http://127.0.0.1:9988",
+            "http://localhost:9995",
         ]
     )
 

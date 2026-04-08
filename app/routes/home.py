@@ -28,3 +28,11 @@ def home() -> Response:
     }
 )
 
+@home_bp.route("/api/status")
+def status() -> Response:
+    print(f"SUCCESS -- called message from BACKEND")
+    return jsonify(
+    {
+            "Status": "Online",
+    }
+)
