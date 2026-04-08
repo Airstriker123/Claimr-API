@@ -19,7 +19,11 @@ def create_app() -> Flask:
     CORS(
         app,
         supports_credentials=True,
-        origins=["https://claimr.dev"]
+        origins=\
+        [
+            "https://claimr.dev",
+            "http://127.0.0.1:9988",
+        ]
     )
 
     register_routes(app)
