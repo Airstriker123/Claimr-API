@@ -6,7 +6,9 @@ from flask import (
 from ..models.user import User
 from typing import Union, Tuple, Any
 
+
 class GetCurrentUserService(object):
+
 
     @staticmethod
     def get_current_user() -> Union[Response, Tuple[Response, int]]:
@@ -22,11 +24,19 @@ class GetCurrentUserService(object):
 
         # if found do this
         user: Any = User.query.filter_by(id=user_id).first()  # query user from database
+
+        if not user:
+            return jsonify(
+                {
+                    "error": "User not found"
+                }
+            ), 401
+
         return jsonify(
-            {
-                # return json data to client for storage
+        {
+            "user": {
                 "id": user.id,
                 "username": user.username
             }
-        ), 200
+        }), 200
 
