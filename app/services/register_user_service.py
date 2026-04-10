@@ -50,7 +50,7 @@ class RegisterUserService(object):
             }), 400
         except Exception as e:
             print(f"[ERROR] failed to register user\n{e}")
-        return jsonify({"status": "401"})
+        return jsonify({"status": "500"})
 
 
     def __username_unique(self) -> bool:
