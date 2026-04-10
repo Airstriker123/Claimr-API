@@ -1,17 +1,22 @@
-from flask import Blueprint, jsonify, request, Response
-from app.services.register_user import RegisterUser
-from app.services.login_user import LoginUser
+from flask import (
+    Blueprint,
+    jsonify,
+    request,
+    Response,
+)
+from app.services.register_user_service import RegisterUserService
+from app.services.login_user_service import LoginUserService
 from typing import Tuple
 
-auth_bp = Blueprint("auth", __name__, url_prefix="/api")
+auth_bp:Blueprint = Blueprint("auth", __name__, url_prefix="/api")
 
 @auth_bp.route("/register", methods=["POST"])
 def register() -> Tuple[Response, int]:
     try:
         # request json data from client (username and password)
-        username = request.json["username"]
-        password = request.json["password"]
-        return RegisterUser(username, password).register()
+        username: str = request.json["username"]
+        password: str = request.json["password"]
+        return RegisterUserService(username, password).register()
     except KeyError as e:
         print(f"[ERROR] failed to fetch username and password from client \n {e}")
     return jsonify({"status": "401"})
@@ -21,9 +26,9 @@ def register() -> Tuple[Response, int]:
 def login() -> Tuple[Response, int]:
     try:
         # request json data from client (username and password)
-        username = request.json["username"]
-        password = request.json["password"]
-        return LoginUser(username, password).login()
+        username: str = request.json["username"]
+        password: str = request.json["password"]
+        return LoginUserService(username, password).login()
     except KeyError as e:
         print(f"[ERROR] failed to fetch username and password from client \n {e}")
     return jsonify({"status": "401"})

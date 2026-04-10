@@ -1,3 +1,5 @@
+import os
+
 class Banner(object):
     """
     class stores look of banner
@@ -5,7 +7,7 @@ class Banner(object):
     """
 
     def __init__(self) -> None:
-        self.banner = \
+        self.banner: str = \
 r"""
 __________                __                      .___    _____ __________.___ 
 \______   \_____    ____ |  | __ ____   ____    __| _/   /  _  \\______   \   |
@@ -15,15 +17,15 @@ __________                __                      .___    _____ __________.___
         \/      \/     \/     \/    \/     \/      \/          \/              
 """
 
-        self.faded_banner = Banner.purplepink(self.banner)
+        self.faded_banner:str = Banner.purplepink(self.banner)
 
     @staticmethod
     def purplepink(text) -> str:
         """
         method to print a banner gradient purple gradient in this case
         """
-        faded = ""
-        red = 40
+        faded: str = ""
+        red: int = 40
         for line in text.splitlines():
             faded += f"\033[38;2;{red};0;220m{line}\033[0m\n"
             if not red == 255:
@@ -33,12 +35,18 @@ __________                __                      .___    _____ __________.___
         return faded
 
 
-def main() -> bool:
-    from app import create_app
-    app = create_app()
+def start() -> bool:
+    """run application"""
+    try:
+        from app import main as application
+    except ImportError as e:
+        print(f"py packages not found...installing: \n errors: {e}")
+        os.system("pip install -r requirements.txt")
+        from app import main as application
+    app: app = application()
     if __name__ == "__main__":
         print(Banner().faded_banner)  # print banner
         app.run(debug=True, host="0.0.0.0", port=9988)
         return True
     return False
-main()
+start()

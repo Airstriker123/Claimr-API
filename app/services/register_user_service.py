@@ -1,32 +1,34 @@
 from ..models.user import User
 from ..extensions import db, bcrypt
-from flask import jsonify, session, Response
-from typing import Union, Tuple
+from flask import (
+    jsonify,
+    session,
+    Response,
+)
+from typing import Tuple
 
 
-class RegisterUser(object):
+class RegisterUserService(object):
 
-    def __init__(self,
-                 username:str,
-                 password:str
-                 ):
-        self.__username = username
-        self.__password_hash = password
+    def __init__(self, username:str,password:str) -> None:
+        self.__username: str = username
+        self.__password_hash: str = password
 
     def register(self) -> Tuple[Response, int]:
         try:
             if self.__username_unique():
-                hashed_password = self.__hash_password()
-                if hashed_password == "": return jsonify({"err": "hash failed"}), 401
+                hashed_password: str = self.__hash_password()
+                if hashed_password == "":
+                    return jsonify({"err": "hash failed"}), 401
                 print("[SUCCESS] user registered")
                 # store user id in session
-                new_user = User(
+                new_user: User = User(
                     username=self.__username,
                     password_hash=hashed_password
                 )
                 db.session.add(new_user)
                 db.session.commit()
-                session["user_id"] = new_user.id
+                session["user_id"]: str = new_user.id
 
                 # return JSON data to client for storage
                 return jsonify(
@@ -47,8 +49,8 @@ class RegisterUser(object):
     def __username_unique(self) -> bool:
         try:
             # CHECK IF USER EXISTS IN DATABASE
-            __user_exits = User.query.filter_by(username=self.__username).first() is not None
-            if __user_exits:
+            __user_exists: bool = User.query.filter_by(username=self.__username).first() is not None
+            if __user_exists:
                 print("[!] register failed - user already exists")
                 return False # if they do exist, notify client that user exists and prevent duplicate accounts
             return True # if unique username_unique = true
@@ -58,8 +60,8 @@ class RegisterUser(object):
 
     def __hash_password(self) -> str:
         try:
-            # ---- security methods (encryption/hasing passwords) ----#
-            self.__hashed_password = bcrypt.generate_password_hash(self.__password_hash).decode("utf-8")
+            # ---- security methods (encryption/hashing passwords) ----#
+            self.__hashed_password: str = bcrypt.generate_password_hash(self.__password_hash).decode("utf-8")
             return self.__hashed_password
             # ---- </security methods> ----#
         except Exception as e:

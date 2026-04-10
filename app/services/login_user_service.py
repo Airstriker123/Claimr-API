@@ -1,21 +1,25 @@
 from ..models.user import User
-from flask import jsonify, session, Response
+from flask import (
+    jsonify,
+    session,
+    Response
+)
 from ..extensions import bcrypt
 
-class LoginUser(object):
+class LoginUserService(object):
 
-    def __init__(self, username:str, password:str):
-        self.username = username
-        self.password = password
-        self.user = User.query.filter_by(username=self.username).first()
+    def __init__(self, username:str, password:str) -> None:
+        self.username: str = username
+        self.password: str = password
+        self.user: User = User.query.filter_by(username=self.username).first()
 
     def login(self) -> tuple[Response, int]:
         try:
-            user = self.user
+            user: User = self.user
             if not self.valid_username() or not self.valid_password():
                 return jsonify({"message": "Invalid username or password"}), 401
             print("[SUCCESS] A USER LOGGED IN!")
-            session["user_id"] = user.id  # store user id in session
+            session["user_id"]: int = user.id  # store user id in session
             # return to client user id and username
             return jsonify(
                 {
@@ -29,7 +33,8 @@ class LoginUser(object):
 
     def valid_password(self) -> bool:
         # check if password is correct
-        if self.user is None: return False #prevent crash if user is none
+        if self.user is None:
+            return False #prevent crash if user is none
         if not bcrypt.check_password_hash(self.user.password_hash, self.password):
             return False
         return True

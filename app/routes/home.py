@@ -1,16 +1,16 @@
 from flask import Blueprint, jsonify ,Response
 import time
 
-home_bp = Blueprint('home', __name__)
-START_TIME = time.time()
+home_bp:Blueprint = Blueprint('home', __name__)
+START_TIME:float = time.time()
 
 
-def get_uptime():
-    total_seconds = int(time.time() - START_TIME)
-    days = total_seconds // 86400
-    hours = (total_seconds % 86400) // 3600
-    minutes = (total_seconds % 3600) // 60
-    seconds = total_seconds % 60
+def get_uptime() -> str:
+    total_seconds:float = int(time.time() - START_TIME)
+    days:float = total_seconds // 86400
+    hours:float = (total_seconds % 86400) // 3600
+    minutes:float = (total_seconds % 3600) // 60
+    seconds:float = total_seconds % 60
     return (f"{days} days, "
             f"{hours} hours, "
             f"{minutes} minutes,"

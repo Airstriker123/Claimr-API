@@ -8,8 +8,8 @@ from .extensions import db, bcrypt
 from .routes import register_routes
 
 
-def create_app() -> Flask:
-    app = Flask(__name__)
+def main() -> Flask:
+    app: Flask = Flask("api.claimr.dev")
     app.config.from_object(Config)
 
     db.init_app(app)
@@ -32,5 +32,4 @@ def create_app() -> Flask:
 
     with app.app_context():
         db.create_all()
-
     return app
