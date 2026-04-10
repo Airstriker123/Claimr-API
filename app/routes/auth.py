@@ -16,10 +16,19 @@ def register() -> Tuple[Response, int]:
         # request json data from client (username and password)
         username: str = request.json["username"]
         password: str = request.json["password"]
-        return RegisterUserService(username, password).register()
+        return RegisterUserService(
+            username,
+            password
+        ).register()
+
     except KeyError as e:
         print(f"[ERROR] failed to fetch username and password from client \n {e}")
-    return jsonify({"status": "401"})
+    return jsonify(
+        {
+            "error": "route error",
+            "status": 400
+        }
+    )
 
 
 @auth_bp.route("/login", methods=["POST"])
@@ -28,7 +37,16 @@ def login() -> Tuple[Response, int]:
         # request json data from client (username and password)
         username: str = request.json["username"]
         password: str = request.json["password"]
-        return LoginUserService(username, password).login()
+        return LoginUserService(
+            username,
+            password
+        ).login()
+
     except KeyError as e:
         print(f"[ERROR] failed to fetch username and password from client \n {e}")
-    return jsonify({"status": "401"})
+    return jsonify(
+        {
+            "error": "route error",
+            "status": 400
+        }
+    )

@@ -1,5 +1,6 @@
 from ..models.user import User
 from ..extensions import db, bcrypt
+import re
 from flask import (
     jsonify,
     session,
@@ -10,16 +11,22 @@ from typing import Tuple
 
 class RegisterUserService(object):
 
+
     def __init__(self, username:str,password:str) -> None:
-        self.__username: str = username
-        self.__password_hash: str = password
+        self.__username: str = username.strip()
+        self.__password: str = password.strip()
+
 
     def register(self) -> Tuple[Response, int]:
         try:
             if self.__username_unique():
-                hashed_password: str = self.__hash_password()
-                if hashed_password == "":
-                    return jsonify({"err": "hash failed"}), 401
+                hashed_password = self.__hash_password()
+                if not hashed_password:
+                    return jsonify(
+                        {
+                            "error": "Password does not meet requirements!"
+                        }
+                    ), 401
                 print("[SUCCESS] user registered")
                 # store user id in session
                 new_user: User = User(
@@ -58,15 +65,29 @@ class RegisterUserService(object):
             print(f"[ERROR] failed to perform SQL query in database \n {e}")
         return False
 
-    def __hash_password(self) -> str:
+
+
+    def __check_valid_password(self) -> bool:
+        pattern = (
+            r"^(?=.*[A-Z])"
+            r"(?=.*[a-z])"
+            r"(?=.*\d)"
+            r"(?=.*[@#$%^&+=!]).{10,20}$"
+        )
+        is_valid = bool(re.match(pattern, self.__password))
+        if self.__password == "":
+            is_valid = False
+        return is_valid
+
+    def __hash_password(self) -> str | bool:
         try:
-            # ---- security methods (encryption/hashing passwords) ----#
-            self.__hashed_password: str = bcrypt.generate_password_hash(self.__password_hash).decode("utf-8")
+            # ---- security methods (encryption/hashing passwords, password checker) ----#
+            if not self.__check_valid_password():
+                return False
+            self.__hashed_password: str = bcrypt.generate_password_hash(self.__password).decode("utf-8")
             return self.__hashed_password
             # ---- </security methods> ----#
         except Exception as e:
             print(f"[ERROR] failed to perform hashing/encrypting of account \n {e}")
-        return jsonify({"status": "401"})
-
-
+        return False
 

@@ -19,7 +19,7 @@ def main() -> Flask:
     CORS(
         app,
         supports_credentials=True,
-        origins=\
+        origins= \
         [
             "https://claimr.dev",
             "http://localhost:9995",
