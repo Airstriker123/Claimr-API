@@ -1,5 +1,5 @@
-from ..models.user import User
-from ..extensions import db, bcrypt
+from app.models.user import User
+from app.extensions import db, bcrypt
 import re
 from flask import (
     jsonify,

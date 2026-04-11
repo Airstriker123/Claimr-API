@@ -1,10 +1,10 @@
-from ..models.user import User
+from app.models.user import User
 from flask import (
     jsonify,
     session,
     Response
 )
-from ..extensions import bcrypt
+from app.extensions import bcrypt
 
 class LoginUserService(object):
 

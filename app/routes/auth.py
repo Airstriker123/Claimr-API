@@ -4,9 +4,9 @@ from flask import (
     request,
     Response,
 )
-from app.services.register_user_service import RegisterUserService
-from app.services.login_user_service import LoginUserService
-from app.services.get_current_user_service import GetCurrentUserService
+from app.services.auth.register_user_service import RegisterUserService
+from app.services.auth.login_user_service import LoginUserService
+from app.services.auth.get_current_user_service import GetCurrentUserService
 from typing import Tuple
 
 auth_bp:Blueprint = Blueprint("auth", __name__, url_prefix="/api")

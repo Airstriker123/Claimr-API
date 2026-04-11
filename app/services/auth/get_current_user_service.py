@@ -3,7 +3,7 @@ from flask import (
     session,
     Response
 )
-from ..models.user import User
+from app.models.user import User
 from typing import Union, Tuple, Any
 
 
