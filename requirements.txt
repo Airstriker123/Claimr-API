@@ -3,3 +3,5 @@ flask_sqlalchemy
 flask_bcrypt
 flask_cors
 python-dotenv
+colorama
+

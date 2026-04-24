@@ -1,5 +1,7 @@
 from app.models.user import User
 from app.extensions import db, bcrypt
+from app.utils.debug import success, error_crash, client_error
+
 import re
 from flask import (
     jsonify,
@@ -22,12 +24,13 @@ class RegisterUserService(object):
             if self.__username_unique():
                 hashed_password: str | bool = self.__hash_password()
                 if not hashed_password:
+                    client_error("password not meet requirements!")
                     return jsonify(
                         {
                             "error": "Password does not meet requirements!"
                         }
                     ), 401
-                print("[SUCCESS] user registered")
+                success(f"Successfully registered user {self.__username}")
                 # store user id in session
                 new_user: User = User(
                     username=self.__username,
@@ -49,7 +52,7 @@ class RegisterUserService(object):
 
             }), 400
         except Exception as e:
-            print(f"[ERROR] failed to register user\n{e}")
+            error_crash(e)
         return jsonify({"status": "500"})
 
 
