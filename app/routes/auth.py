@@ -7,12 +7,12 @@ from flask import (
 from app.services.auth.register_user_service import RegisterUserService
 from app.services.auth.login_user_service import LoginUserService
 from app.services.auth.get_current_user_service import GetCurrentUserService
-from typing import Tuple
+from typing import Tuple, Any
 
 auth_bp:Blueprint = Blueprint("auth", __name__, url_prefix="/api")
 
 @auth_bp.route("/register", methods=["POST"])
-def register() -> Tuple[Response, int]:
+def register() -> Tuple[Response, int] | int:
     try:
         # request json data from client (username and password)
         username: str = request.json["username"]
@@ -21,19 +21,13 @@ def register() -> Tuple[Response, int]:
             username,
             password
         ).register()
-
-    except KeyError as e:
+    except Exception as e:
         print(f"[ERROR] failed to fetch username and password from client \n {e}")
-    return jsonify(
-        {
-            "error": "route error",
-            "status": 400
-        }
-    )
+    return 500
 
 
 @auth_bp.route("/login", methods=["POST"])
-def login() -> Tuple[Response, int]:
+def login() -> Tuple[Response, int] | int:
     try:
         # request json data from client (username and password)
         username: str = request.json["username"]
@@ -41,22 +35,17 @@ def login() -> Tuple[Response, int]:
         return LoginUserService(
             username,
             password
-        ).login()
-
-    except KeyError as e:
+        ).login() , 200
+    except Exception as e:
         print(f"[ERROR] failed to fetch username and password from client \n {e}")
-    return jsonify(
-        {
-            "error": "route error",
-            "status": 400
-        }
-    )
+    return 500
 
 @auth_bp.route("/@me", methods=["GET"])
-def get_current_session():
+def get_current_session() -> tuple[Any, int] | None | Any:
     try:
-        return GetCurrentUserService().get_current_user()
-    except KeyError as e:
+        return GetCurrentUserService().get_current_user(), 200
+    except Exception as e:
         print(f"[ERROR] failed to validate session \n {e}")
+    return 500
 
 

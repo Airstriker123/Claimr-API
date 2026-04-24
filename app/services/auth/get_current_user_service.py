@@ -9,7 +9,6 @@ from typing import Union, Tuple, Any
 
 class GetCurrentUserService(object):
 
-
     @staticmethod
     def get_current_user() -> Union[Response, Tuple[Response, int]]:
         # get the client user and check if they are authorized

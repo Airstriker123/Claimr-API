@@ -20,7 +20,7 @@ class RegisterUserService(object):
     def register(self) -> Tuple[Response, int]:
         try:
             if self.__username_unique():
-                hashed_password = self.__hash_password()
+                hashed_password: str | bool = self.__hash_password()
                 if not hashed_password:
                     return jsonify(
                         {
@@ -74,10 +74,14 @@ class RegisterUserService(object):
             r"(?=.*\d)"
             r"(?=.*[@#$%^&+=!]).{10,20}$"
         )
-        is_valid = bool(re.match(pattern, self.__password))
+        is_valid = bool(re.match(
+            pattern,
+            self.__password)
+        )
         if self.__password == "":
             is_valid = False
         return is_valid
+
 
     def __hash_password(self) -> str | bool:
         try:
