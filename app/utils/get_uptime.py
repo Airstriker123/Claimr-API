@@ -8,7 +8,9 @@ def get_uptime() -> str:
     hours: float = (total_seconds % 86400) // 3600
     minutes: float = (total_seconds % 3600) // 60
     seconds: float = total_seconds % 60
-    return (f"{days} days, "
-            f"{hours} hours, "
-            f"{minutes} minutes,"
-            f" {seconds}seconds")
+    return (
+        f"{days} days, "
+        f"{hours} hours, "
+        f"{minutes} minutes,"
+        f" {seconds}seconds"
+    )

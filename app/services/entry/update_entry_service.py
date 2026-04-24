@@ -1,15 +1,22 @@
 from typing import Any, Dict, Tuple
-
-from flask import session, jsonify, request
+from flask import (
+    session,
+    jsonify,
+    request
+)
 from app.models.entry import Entry
 from app.extensions import db
 from datetime import datetime
 
+
 class UpdateEntryService:
 
+
     def __init__(self) -> None:
+
         self.user_id: Any = session.get("user_id")
         self.data: Dict[Any, Any] | Any  = request.get_json() or {}
+
 
     def __convert_date(self) -> datetime | None:
         try:
@@ -17,6 +24,7 @@ class UpdateEntryService:
         except Exception as e:
             print(e)
             return None
+
 
     def update_entry(self, entry_id: int) -> Tuple[Any, int]:
         if not self.user_id:
