@@ -3,7 +3,9 @@ import traceback
 from datetime import datetime
 from colorama import Fore, init
 
+
 init(autoreset=True)
+
 
 # Colors
 RED = Fore.RED
@@ -15,6 +17,7 @@ CYAN = Fore.CYAN
 GREY = Fore.LIGHTBLACK_EX
 PURPLE = Fore.MAGENTA
 RESET = Fore.RESET
+
 
 # ===== Core Logger =====
 def log(message: str, level: str = "INFO"):
@@ -33,18 +36,22 @@ def log(message: str, level: str = "INFO"):
 
 # ===== Error Handler =====
 def error_crash(e: Exception, context: str = ""):
-    print(GREY + traceback.format_exc())
     log(f"{context} -> {str(e)}", "ERROR")
+    print(GREY + traceback.format_exc())
+
 
 # ===== Success / Info helpers =====
 def success(msg: str):
     log(msg, "SUCCESS")
 
+
 def client_error(msg: str):
     log(msg, "Client I/O Error")
 
+
 def warn(msg: str):
     log(msg, "WARN")
+
 
 def info(msg: str):
     log(msg, "INFO")

@@ -3,15 +3,16 @@ from flask_cors import CORS
 from flask_session import Session
 import logging
 
+
 from .config import Config
 from .extensions import db, bcrypt
 from .routes import register_routes
 
 
 def main() -> Flask:
+
     app: Flask = Flask("api.claimr.dev")
     app.config.from_object(Config)
-
     db.init_app(app)
     bcrypt.init_app(app)
     Session(app)
@@ -27,7 +28,6 @@ def main() -> Flask:
     )
 
     register_routes(app)
-
     logging.getLogger("sqlalchemy.engine").setLevel(logging.WARNING)
 
     with app.app_context():

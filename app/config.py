@@ -1,10 +1,13 @@
 import os
 from dotenv import load_dotenv
 
+
 load_dotenv() #load environment file
+
 
 class Config:
     """ORM Database configuration"""
+
     SECRET_KEY: str = os.getenv("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI: str = "sqlite:///db.sqlite"
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False

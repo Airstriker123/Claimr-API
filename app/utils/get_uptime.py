@@ -1,6 +1,8 @@
 import time
 
+
 START_TIME: float = time.time()
+
 
 def get_uptime() -> str:
     total_seconds: float = int(time.time() - START_TIME)
