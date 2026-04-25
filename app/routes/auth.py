@@ -35,7 +35,7 @@ def login() -> Tuple[Response, int] | int:
         return LoginUserService(
             username,
             password
-        ).login() , 200
+        ).login()
     except Exception as e:
         print(f"[ERROR] failed to fetch username and password from client \n {e}")
     return 500
@@ -43,7 +43,7 @@ def login() -> Tuple[Response, int] | int:
 @auth_bp.route("/@me", methods=["GET"])
 def get_current_session() -> tuple[Any, int] | None | Any:
     try:
-        return GetCurrentUserService().get_current_user(), 200
+        return GetCurrentUserService().get_current_user()
     except Exception as e:
         print(f"[ERROR] failed to validate session \n {e}")
     return 500

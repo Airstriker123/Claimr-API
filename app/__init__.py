@@ -24,6 +24,7 @@ def main() -> Flask:
         [
             "https://claimr.dev",
             "http://localhost:9995",
+            "http://192.168.68.112:4173"
         ]
     )
 
