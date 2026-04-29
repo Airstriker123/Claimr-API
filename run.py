@@ -2,7 +2,7 @@ import os
 
 
 def banner() -> str:
-    banner: str = \
+    banner_text: str = \
 r"""
 __________                __                      .___    _____ __________.___ 
 \______   \_____    ____ |  | __ ____   ____    __| _/   /  _  \\______   \   |
@@ -13,7 +13,7 @@ __________                __                      .___    _____ __________.___
 """
     faded_banner: str = ""
     red: int = 40
-    for line in banner.splitlines():
+    for line in banner_text.splitlines():
         faded_banner += f"\033[38;2;{red};0;220m{line}\033[0m\n"
         if not red == 255:
             red += 15
