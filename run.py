@@ -1,4 +1,7 @@
 import os
+import random
+import string
+from codecs import replace_errors
 
 
 def banner() -> str:
@@ -21,6 +24,21 @@ __________                __                      .___    _____ __________.___
                 red = 255
     return faded_banner
 
+
+def create_env() -> bool:
+    """create an environment secret for application"""
+    if not os.path.exists("app/.env"):
+        random_string = ''.join(
+            random.choices(
+            string.ascii_letters + string.digits, k=67)
+        )
+
+        with open("app/.env", "w") as secret:
+            # create a random secret key and write to file
+            secret.write(f"SECRET_KEY={random_string}")
+        return True
+    return False
+
 def start() -> bool:
     """run application"""
     try:
@@ -32,6 +50,7 @@ def start() -> bool:
     app: app = application()
     if __name__ == "__main__":
         #dev configs
+        create_env()
         print(banner())  # print banner
         app.run(
             debug=True,

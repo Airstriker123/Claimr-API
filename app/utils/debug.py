@@ -18,7 +18,6 @@ GREY = Fore.LIGHTBLACK_EX
 PURPLE = Fore.MAGENTA
 RESET = Fore.RESET
 
-
 # ===== Core Logger =====
 def log(message: str, level: str = "INFO"):
     time = datetime.now().strftime("%H:%M:%S")
