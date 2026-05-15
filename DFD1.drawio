@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0">
   <diagram name="Page-1" id="3mIat5wmb4y1Y45a6UQU">
-    <mxGraphModel dx="3721" dy="1466" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3363" dy="1283" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -198,6 +198,15 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="s75-NGA6GFtjaOhSAIRX-94" edge="1" parent="1" source="s75-NGA6GFtjaOhSAIRX-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;curved=1;" target="s75-NGA6GFtjaOhSAIRX-93">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="153" y="580" />
+              <mxPoint x="20" y="580" />
+              <mxPoint x="20" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="s75-NGA6GFtjaOhSAIRX-44" parent="1" style="shape=ellipse;html=1;dashed=0;whiteSpace=wrap;aspect=fixed;perimeter=ellipsePerimeter;" value="Manage user entries" vertex="1">
           <mxGeometry height="160" width="160" x="130" y="615" as="geometry" />
         </mxCell>
@@ -285,6 +294,18 @@
         </mxCell>
         <mxCell id="s75-NGA6GFtjaOhSAIRX-92" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="entries" vertex="1">
           <mxGeometry height="30" width="60" x="520" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="s75-NGA6GFtjaOhSAIRX-96" edge="1" parent="1" source="s75-NGA6GFtjaOhSAIRX-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;curved=1;" target="s75-NGA6GFtjaOhSAIRX-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s75-NGA6GFtjaOhSAIRX-93" parent="1" style="shape=ellipse;html=1;dashed=0;whiteSpace=wrap;perimeter=ellipsePerimeter;" value="add entry using OCR" vertex="1">
+          <mxGeometry height="60" width="80" x="-170" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="s75-NGA6GFtjaOhSAIRX-95" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="receipt image" vertex="1">
+          <mxGeometry height="30" width="80" x="40" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="s75-NGA6GFtjaOhSAIRX-97" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;rotation=-20;" value="add new entry(using extracted values)" vertex="1">
+          <mxGeometry height="30" width="120" x="-340" y="520" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
