@@ -1,8 +1,0 @@
-flask
-flask_sqlalchemy
-flask_bcrypt
-flask_cors
-flask_session
-python-dotenv
-colorama
-
