@@ -1,8 +1,6 @@
 import os
 import random
 import string
-from codecs import replace_errors
-
 
 def banner() -> str:
     banner_text: str = \
