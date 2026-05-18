@@ -1,8 +1,11 @@
+# this file automates the process of project setup
+
 import os
 import random
 import string
 
 def banner() -> str:
+    """banner printing function"""
     banner_text: str = \
 r"""
 __________                __                      .___    _____ __________.___ 
@@ -14,7 +17,7 @@ __________                __                      .___    _____ __________.___
 """
     faded_banner: str = ""
     red: int = 40
-    for line in banner_text.splitlines():
+    for line in banner_text.splitlines(): #format banner in a faded purple gradient
         faded_banner += f"\033[38;2;{red};0;220m{line}\033[0m\n"
         if not red == 255:
             red += 15
@@ -51,6 +54,7 @@ def start() -> bool:
         create_env()
         print(banner())  # print banner
         app.run(
+            # application configuration args
             debug=True,
             host="0.0.0.0",
             port=9988,
@@ -60,6 +64,5 @@ def start() -> bool:
             use_evalex=True,
         )
         return True
-    #production configs
     return False
 start()

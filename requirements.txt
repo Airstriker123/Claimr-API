@@ -1,8 +1,9 @@
-flask
-flask_sqlalchemy
-flask_bcrypt
-flask_cors
-flask_session
+Flask
+Flask-SQLAlchemy
+Flask-Bcrypt
+Flask-Cors
+Flask-Session
 python-dotenv
 colorama
-
+Flask-Limiter
+redis>=4.0.0

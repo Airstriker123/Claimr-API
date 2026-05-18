@@ -8,11 +8,13 @@ from app.services.auth.register_user_service import RegisterUserService
 from app.services.auth.login_user_service import LoginUserService
 from app.services.auth.get_current_user_service import GetCurrentUserService
 from app.services.auth.wipe_session_service import WipeSessionService
+from app.extensions import limiter
 from typing import Tuple, Any
 
 auth_bp:Blueprint = Blueprint("auth", __name__, url_prefix="/api")
 
 @auth_bp.route("/register", methods=["POST"])
+@limiter.limit("5 per minute")
 def register() -> Tuple[Response, int] | int:
     try:
         # request json data from client (username and password)
@@ -28,6 +30,7 @@ def register() -> Tuple[Response, int] | int:
 
 
 @auth_bp.route("/login", methods=["POST"])
+@limiter.limit("5 per minute")
 def login() -> Tuple[Response, int] | int:
     try:
         # request json data from client (username and password)
@@ -42,6 +45,7 @@ def login() -> Tuple[Response, int] | int:
     return 500
 
 @auth_bp.route("/@me", methods=["GET"])
+@limiter.limit("100 per minute")
 def get_current_session() -> tuple[Any, int] | None | Any:
     try:
         return GetCurrentUserService().get_current_user()

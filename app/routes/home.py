@@ -3,6 +3,7 @@ from flask import (
     jsonify ,
     Response
 )
+from app.extensions import limiter
 from ..utils import get_uptime, success, warn
 
 home_bp:Blueprint = Blueprint('home', __name__)
