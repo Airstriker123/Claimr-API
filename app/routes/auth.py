@@ -14,7 +14,7 @@ from typing import Tuple, Any
 auth_bp:Blueprint = Blueprint("auth", __name__, url_prefix="/api")
 
 @auth_bp.route("/register", methods=["POST"])
-@limiter.limit("5 per minute")
+@limiter.limit("1 per day") # 1 account max per day per client ip
 def register() -> Tuple[Response, int] | int:
     try:
         # request json data from client (username and password)
@@ -30,7 +30,7 @@ def register() -> Tuple[Response, int] | int:
 
 
 @auth_bp.route("/login", methods=["POST"])
-@limiter.limit("5 per minute")
+@limiter.limit("5/minute;1/second")
 def login() -> Tuple[Response, int] | int:
     try:
         # request json data from client (username and password)
@@ -45,7 +45,7 @@ def login() -> Tuple[Response, int] | int:
     return 500
 
 @auth_bp.route("/@me", methods=["GET"])
-@limiter.limit("100 per minute")
+@limiter.limit("100/minute;3/second")
 def get_current_session() -> tuple[Any, int] | None | Any:
     try:
         return GetCurrentUserService().get_current_user()

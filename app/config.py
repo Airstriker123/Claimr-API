@@ -6,7 +6,10 @@ load_dotenv() #load environment file
 
 
 class Config:
-    """ORM Database configuration"""
+    """API APPLICATION CONFIGURATION CLASS:
+    - stores config for database
+    - stores config for Claimr API
+    """
 
     SECRET_KEY: str = os.getenv("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI: str = "sqlite:///db.sqlite"

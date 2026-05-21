@@ -40,29 +40,34 @@ def create_env() -> bool:
         return True
     return False
 
-def start() -> bool:
-    """run application"""
-    try:
-        from app import main as application
-    except Exception as e:
-        print(f"py packages not found...installing: \n errors: {e}")
-        os.system("pip install -r requirements.txt")
-        from app import main as application
-    app: app = application()
-    if __name__ == "__main__":
-        #dev configs
-        create_env()
-        print(banner())  # print banner
-        app.run(
-            # application configuration args
-            debug=True,
-            host="0.0.0.0",
-            port=9988,
-            threaded=True,
-            use_reloader=True,
-            use_debugger=True,
-            use_evalex=True,
-        )
-        return True
-    return False
-start()
+def clear() -> None:
+    """clear the console"""
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+# run the application
+try:
+    from app import main as application
+except Exception as e:
+    print(f"py packages not found...installing: \n errors: {e}")
+    os.system("pip install -r requirements.txt")
+    from app import main as application
+app: app = application()
+
+if __name__ == "__main__":
+    # dev configs
+    create_env()
+    clear()
+    print(banner())  # print banner
+    app.run(
+        # application configuration args
+        debug=True,
+        host="0.0.0.0",
+        port=9988,
+        threaded=True,
+        use_reloader=True,
+        use_debugger=True,
+        use_evalex=True,
+    )
