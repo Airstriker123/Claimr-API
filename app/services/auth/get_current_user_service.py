@@ -8,6 +8,7 @@ from typing import Union, Tuple, Any
 
 
 class GetCurrentUserService(object):
+    """Backend logic for Getting the current user and session"""
 
     @staticmethod
     def get_current_user() -> Union[Response, Tuple[Response, int]]:
@@ -21,16 +22,17 @@ class GetCurrentUserService(object):
                 }
             ), 401
 
-        # if found do this
-        user: Any = User.query.filter_by(id=user_id).first()  # query user from database
+        #if found do this
+        user: Any = User.query.filter_by(id=user_id).first()  # query uuid from database
 
+        #if user not found
         if not user:
             return jsonify(
                 {
                     "error": "User not found"
                 }
             ), 401
-
+        #if user found
         return jsonify(
         {
             "user": {

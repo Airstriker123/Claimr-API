@@ -5,9 +5,10 @@ def get_uuid() -> str:
     return uuid4().hex #unique user id for each user
 
 class User(db.Model):
+    """Table to store user information about uuid, username and hashed password."""
     __tablename__: str = "users"  # name
     # table fields, colums (converts to sql)
-    id: int = db.Column(db.String(32),  # uuid string length
+    id: str = db.Column(db.String(32),  # uuid string length
                    primary_key=True,
                    unique=True,
                    default=get_uuid

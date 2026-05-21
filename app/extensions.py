@@ -8,7 +8,7 @@ from flask_limiter.util import get_remote_address
 limiter: Limiter = Limiter(
     key_func=get_remote_address,
     default_limits=["200 per day", "50 per minute", "1 per second"]
-    #storage_uri="redis://localhost:6379", -- in production a redis instancee must exist (removed to avoid using docker in dev)
+    #storage_uri="redis://localhost:6379", -- in production a redis instance must exist (removed to avoid using docker in dev)
 )
-db: SQLAlchemy = SQLAlchemy()
-bcrypt: Bcrypt = Bcrypt()
+db: SQLAlchemy = SQLAlchemy() # Integrates SQLAlchemy with Flask.
+bcrypt: Bcrypt = Bcrypt() #Bcrypt class container for password hashing and checking logic using bcrypt.

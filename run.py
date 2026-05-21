@@ -1,4 +1,5 @@
 # this file automates the process of project setup
+# Not related to program functionality.
 
 import os
 import random
