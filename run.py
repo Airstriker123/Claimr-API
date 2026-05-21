@@ -63,11 +63,11 @@ if __name__ == "__main__":
     print(banner())  # print banner
     app.run(
         # application configuration args
-        debug=True,
+        debug=False,
         host="0.0.0.0",
         port=9988,
         threaded=True,
         use_reloader=True,
-        use_debugger=True,
+        use_debugger=False,
         use_evalex=True,
     )

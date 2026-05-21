@@ -1,8 +1,6 @@
 from flask import (
     Blueprint,
-    jsonify,
     Response,
-    request
 )
 from ..services.entry.get_entry_service import GetEntryService
 from ..services.entry.update_entry_service import UpdateEntryService
