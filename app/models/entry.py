@@ -12,6 +12,9 @@ class Entry(db.Model):
     tax: Any = db.Column(db.Float)
     category: Any = db.Column(db.String(50))
     description: Any = db.Column(db.Text)
+    warranty_months: Any = db.Column(db.Integer, nullable=True)
+    warranty_expiry_date: Any = db.Column(db.DateTime, nullable=True)
+    created_at: Any = db.Column(db.DateTime, default=db.func.current_timestamp())
     user_id: Any = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 

@@ -1,14 +1,14 @@
-from app.models.user import User
-from app.extensions import db, bcrypt
-from app.utils.debug import success, error_crash, client_error
-
 import re
+
 from flask import (
     jsonify,
     session,
     Response,
 )
-from typing import Tuple
+
+from app.extensions import db, bcrypt
+from app.models.user import User
+from app.utils.debug import success, error_crash, client_error
 
 
 class RegisterUserService(object):
