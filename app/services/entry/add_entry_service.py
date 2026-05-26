@@ -47,7 +47,10 @@ class AddEntryService:
         try:
             amount: float  = float(data.get("amount"))
             tax: float = float(data.get("tax") or 0)
-            warranty_months = int(data.get("warrantyMonths")) if data.get("warrantyMonths") else None
+            
+            warranty_months = None
+            if data.get("warrantyMonths"):
+                warranty_months = int(data.get("warrantyMonths"))
         except ValueError:
             return jsonify(
                 {

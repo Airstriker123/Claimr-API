@@ -44,7 +44,10 @@ class AddBatchEntriesService:
 
                     amount = float(entry_data.get("amount"))
                     tax = float(entry_data.get("tax") or 0)
-                    warranty_months = int(entry_data.get("warrantyMonths")) if entry_data.get("warrantyMonths") else None
+                    
+                    warranty_months = None
+                    if entry_data.get("warrantyMonths"):
+                        warranty_months = int(entry_data.get("warrantyMonths"))
                     
                     expiry_date = None
                     if entry_data.get("warrantyExpiryDate"):

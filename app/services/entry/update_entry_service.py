@@ -77,13 +77,17 @@ class UpdateEntryService:
 
         if "warrantyMonths" in self.data:
             try:
-                entry.warranty_months = int(self.data["warrantyMonths"]) if self.data["warrantyMonths"] else None
+                entry.warranty_months = None
+                if self.data["warrantyMonths"]:
+                    entry.warranty_months = int(self.data["warrantyMonths"])
             except ValueError:
                 pass
 
         if "warrantyExpiryDate" in self.data:
             try:
-                entry.warranty_expiry_date = datetime.fromisoformat(self.data["warrantyExpiryDate"]) if self.data["warrantyExpiryDate"] else None
+                entry.warranty_expiry_date = None
+                if self.data["warrantyExpiryDate"]:
+                    entry.warranty_expiry_date = datetime.fromisoformat(self.data["warrantyExpiryDate"])
             except (TypeError, ValueError):
                 pass
 

@@ -12,15 +12,15 @@ from app.extensions import limiter
 from typing import Tuple
 
 
-# path config — joins route to blueprint project
+# Blueprint configuration for entry-related routes
 entries_bp: Blueprint = Blueprint("entries", __name__, url_prefix="/api")
 
 @entries_bp.route("/entries", methods=["POST"])
 @limiter.limit("100/minute;2/second")
 def add_entry() -> Tuple[Response, int]:
-    """Route to add a new entry to the database"""
+    """Route to add a new tax deduction entry."""
     try:
-        return AddEntryService().add_entry() #get response
+        return AddEntryService().add_entry()
     except Exception as e:
         print(f"[ERROR] failed to add entry\n{e}")
         return jsonify({"error": "Internal Server Error"}), 500
@@ -29,21 +29,20 @@ def add_entry() -> Tuple[Response, int]:
 @entries_bp.route("/entries/batch", methods=["POST"])
 @limiter.limit("50/minute;5/second")
 def add_entries_batch() -> Tuple[Response, int]:
-    """Route to add multiple entries to the database"""
+    """Route to add multiple tax deduction entries in one request."""
     try:
-        return AddBatchEntriesService().add_entries() #get response
+        return AddBatchEntriesService().add_entries()
     except Exception as e:
         print(f"[ERROR] failed to add batch entries\n{e}")
         return jsonify({"error": "Internal Server Error"}), 500
 
 
 @entries_bp.route("entries", methods=["GET"])
-@limiter.limit("200/minute;50/second") # prevents malicious tools from mass spamming entry requests
+@limiter.limit("200/minute;50/second") # Prevents mass spamming of entry requests
 def fetch_entries() -> Tuple[Response, int]:
-
-    """Route to fetch all entries from the database"""
+    """Route to fetch all entries for the authenticated user."""
     try:
-        return GetEntryService().get_entries() #get response
+        return GetEntryService().get_entries()
 
     except Exception as e:
         print(f"[ERROR] failed to fetch entries\n{e}")
@@ -52,9 +51,9 @@ def fetch_entries() -> Tuple[Response, int]:
 @entries_bp.route("/entries/<int:entry_id>", methods=["DELETE"])
 @limiter.limit("80/minute;")
 def delete_entry(entry_id: int) -> Tuple[Response, int]:
-    """Route to delete an entry from the database"""
+    """Route to delete a specific entry by ID."""
     try:
-        return DeleteEntryService().delete_entry(entry_id) #get response
+        return DeleteEntryService().delete_entry(entry_id)
 
     except Exception as e:
         print(f"[ERROR] failed to delete entry\n{e}")
@@ -64,9 +63,9 @@ def delete_entry(entry_id: int) -> Tuple[Response, int]:
 @entries_bp.route("/entries/<int:entry_id>", methods=["PUT"])
 @limiter.limit("80/minute;")
 def update_entry(entry_id: int) -> Tuple[Response, int]:
-    """Route to update an entry from the database"""
+    """Route to update an existing entry by ID."""
     try:
-        return UpdateEntryService().update_entry(entry_id) #get response
+        return UpdateEntryService().update_entry(entry_id)
     except Exception as e:
         print(f"[ERROR] failed to update entry\n{e}")
         return jsonify({"error": "Internal Server Error"}), 500
