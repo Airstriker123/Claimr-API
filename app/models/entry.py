@@ -25,7 +25,7 @@ class Entry(db.Model):
     
     # Metadata and relationship
     created_at: Any = db.Column(db.DateTime, default=db.func.current_timestamp())
-    user_id: Any = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id: Any = db.Column(db.String, db.ForeignKey('users.id'))
 
 
 
