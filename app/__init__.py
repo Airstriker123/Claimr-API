@@ -35,7 +35,7 @@ def main() -> Flask:
         supports_credentials=True,
         origins= \
         [
-            "https://claimr.dev",
+            # frontend vite server needs to run on port 9995 to allow connection between frontend and backend
             "http://localhost:9995",
             "http://192.168.68.112:4173"
         ]

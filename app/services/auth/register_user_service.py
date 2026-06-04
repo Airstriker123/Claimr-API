@@ -89,7 +89,7 @@ class RegisterUserService(object):
             self.__password)
         ) # query with pattern using regex
         if self.__password == "": # if no input
-            is_valid = False
+             is_valid = False
         return is_valid
 
 

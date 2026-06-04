@@ -27,7 +27,11 @@ def register() -> Tuple[Response, int]:
         ).register() #get from service
     except Exception as e:
         print(f"[ERROR] failed to fetch username and password from client \n {e}")
-        return jsonify({"error": "Internal Server Error"}), 500
+        return jsonify(
+            {
+                "error": "Internal Server Error"
+            }
+        ), 500
 
 
 @auth_bp.route("/login", methods=["POST"])
@@ -44,7 +48,11 @@ def login() -> Tuple[Response, int]:
         ).login()
     except Exception as e:
         print(f"[ERROR] failed to fetch username and password from client \n {e}")
-        return jsonify({"error": "Internal Server Error"}), 500
+        return jsonify(
+            {
+                "error": "Internal Server Error"
+            }
+        ), 500
 
 @auth_bp.route("/@me", methods=["GET"])
 @limiter.limit("100/minute;3/second")
@@ -55,7 +63,11 @@ def get_current_session() -> tuple[Any, int]:
         return GetCurrentUserService().get_current_user()
     except Exception as e:
         print(f"[ERROR] failed to validate session \n {e}")
-        return jsonify({"error": "Internal Server Error"}), 500
+        return jsonify(
+            {
+                "error": "Internal Server Error"
+            }
+        ), 500
 
 
 @auth_bp.route("/logout", methods=["POST"])
@@ -65,7 +77,11 @@ def logout_current_session() -> tuple[Any, int]:
         return WipeSessionService().wipe_session()
     except Exception as e:
         print(f"[ERROR] failed to delete session \n {e}")
-        return jsonify({"error": "Internal Server Error"}), 500
+        return jsonify(
+            {
+                "error": "Internal Server Error"
+            }
+        ), 500
 
 
 

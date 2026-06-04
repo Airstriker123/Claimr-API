@@ -24,7 +24,11 @@ class LoginUserService(object):
             user: User = self.user # new object of User
             #check if form data from request was valid and matches user records
             if not self.valid_username() or not self.valid_password():
-                return jsonify({"message": "Invalid username or password"}), 401
+                return jsonify(
+                    {
+                        "message": "Invalid username or password"
+                    }
+                ), 401
             print("[SUCCESS] A USER LOGGED IN!")
             session["user_id"]: int = user.id  # store user id in session
             # return to client user id and username
@@ -36,7 +40,11 @@ class LoginUserService(object):
             ), 200
         except Exception as e:
             print(f"[ERROR] {e}")
-        return jsonify({"message": "server down"}), 401
+        return jsonify(
+            {
+                "message": "server down"
+            }
+        ), 401
 
     def valid_password(self) -> bool:
         """Check if password is correct"""

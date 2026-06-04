@@ -1,4 +1,4 @@
-# utils/debug.py
+# utils/debug.py — debugging useful log messages
 import traceback
 from datetime import datetime
 from colorama import Fore, init

@@ -69,6 +69,4 @@ if __name__ == "__main__":
         port=9988,
         threaded=True,
         use_reloader=True,
-        use_debugger=False,
-        use_evalex=True,
     )

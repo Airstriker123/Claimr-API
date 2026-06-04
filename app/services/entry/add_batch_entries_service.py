@@ -86,6 +86,7 @@ class AddBatchEntriesService:
                         "synced": True
                     })
                 except Exception as e:
+                    # if entry not synced because of error
                     print(f"[ERROR] Entry processing failed: {e}")
                     results.append({"error": str(e), "synced": False})
 
@@ -93,6 +94,7 @@ class AddBatchEntriesService:
             return jsonify(results), 201
 
         except Exception as e:
+            # if operation failed
             db.session.rollback()
             print(f"[ERROR] Batch commit failed: {e}")
             return jsonify({"error": "Failed to add entries"}), 500

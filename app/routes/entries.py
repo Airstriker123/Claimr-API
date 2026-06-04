@@ -23,7 +23,11 @@ def add_entry() -> Tuple[Response, int]:
         return AddEntryService().add_entry()
     except Exception as e:
         print(f"[ERROR] failed to add entry\n{e}")
-        return jsonify({"error": "Internal Server Error"}), 500
+        return jsonify(
+            {
+                "error": "Internal Server Error"
+            }
+        ), 500
 
 
 @entries_bp.route("/entries/batch", methods=["POST"])
@@ -34,7 +38,11 @@ def add_entries_batch() -> Tuple[Response, int]:
         return AddBatchEntriesService().add_entries()
     except Exception as e:
         print(f"[ERROR] failed to add batch entries\n{e}")
-        return jsonify({"error": "Internal Server Error"}), 500
+        return jsonify(
+            {
+                "error": "Internal Server Error"
+            }
+        ), 500
 
 
 @entries_bp.route("entries", methods=["GET"])
@@ -46,7 +54,11 @@ def fetch_entries() -> Tuple[Response, int]:
 
     except Exception as e:
         print(f"[ERROR] failed to fetch entries\n{e}")
-        return jsonify({"error": "Internal Server Error"}), 500
+        return jsonify(
+            {
+                "error": "Internal Server Error"
+            }
+        ), 500
 
 @entries_bp.route("/entries/<int:entry_id>", methods=["DELETE"])
 @limiter.limit("80/minute;")
@@ -57,7 +69,11 @@ def delete_entry(entry_id: int) -> Tuple[Response, int]:
 
     except Exception as e:
         print(f"[ERROR] failed to delete entry\n{e}")
-        return jsonify({"error": "Internal Server Error"}), 500
+        return jsonify(
+            {
+                "error": "Internal Server Error"
+            }
+        ), 500
 
 
 @entries_bp.route("/entries/<int:entry_id>", methods=["PUT"])
@@ -68,4 +84,8 @@ def update_entry(entry_id: int) -> Tuple[Response, int]:
         return UpdateEntryService().update_entry(entry_id)
     except Exception as e:
         print(f"[ERROR] failed to update entry\n{e}")
-        return jsonify({"error": "Internal Server Error"}), 500
+        return jsonify(
+            {
+                "error": "Internal Server Error"
+            }
+        ), 500

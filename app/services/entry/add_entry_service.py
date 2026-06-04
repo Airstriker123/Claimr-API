@@ -27,7 +27,7 @@ class AddEntryService:
 
     def add_entry(self) -> Tuple[Any, int]:
         """Validates request data and creates a new entry in the database."""
-        if not self.__user_id:
+        if not self.__user_id: # check if client user is authenticated
             return jsonify(
                 {
                     "error": "Unauthorized"
@@ -61,6 +61,7 @@ class AddEntryService:
         expiry_date = None
         if data.get("warrantyExpiryDate"):
             try:
+                # format the warranty expiry date received from frontend into datetime
                 expiry_date = datetime.fromisoformat(data.get("warrantyExpiryDate"))
             except (TypeError, ValueError):
                 pass

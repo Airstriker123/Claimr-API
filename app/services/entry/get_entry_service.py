@@ -34,5 +34,5 @@ class GetEntryService:
                 "warrantyMonths": e.warranty_months,
                 "warrantyExpiryDate": e.warranty_expiry_date.isoformat() if e.warranty_expiry_date else None
             }
-            for e in entries
+            for e in entries # loop between each entry
         ]), 200

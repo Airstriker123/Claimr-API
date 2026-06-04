@@ -40,7 +40,7 @@ class UpdateEntryService:
                 }
             ), 404
 
-        # Update fields safely based on presence in request data
+        # <Update fields safely based on presence in request data>
         if "merchant" in self.data:
             entry.merchant = self.data["merchant"]
 
@@ -92,6 +92,7 @@ class UpdateEntryService:
                 pass
 
         db.session.commit()
+        # </Update fields safely based on presence in request data>
 
         return jsonify(
             {

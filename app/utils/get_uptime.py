@@ -5,7 +5,7 @@ START_TIME: float = time.time()
 
 
 def get_uptime() -> str:
-    """Get current uptime in seconds for server"""
+    """Get current uptime in seconds for server — displays time server has been online for"""
     total_seconds: float = int(time.time() - START_TIME)
     days: float = total_seconds // 86400
     hours: float = (total_seconds % 86400) // 3600
