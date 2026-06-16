@@ -14,8 +14,8 @@ class LoginUserService(object):
         Initialize the class
         (stores username and password from client data request)
         """
-        self.username: str = username
-        self.password: str = password
+        self.username: str = username.strip()
+        self.password: str = password.strip()
         self.user: User = User.query.filter_by(username=self.username).first() #query user in database
 
     def login(self) -> tuple[Response, int]:
