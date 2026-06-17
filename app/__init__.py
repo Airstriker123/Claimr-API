@@ -22,7 +22,7 @@ from .routes import register_routes
 #———<entry function to application  (initializes the app)>—————#
 def main() -> Flask:
     """Main entry point for the application."""
-    app: Flask = Flask("api.claimr.dev") # create  app flask object
+    app: Flask = Flask(__name__) # create  app flask object
     app.config.from_object(Config) #pull app config from Config class
     db.init_app(app) # Construct database (sql) using application
     bcrypt.init_app(app) # bcrypt construct
